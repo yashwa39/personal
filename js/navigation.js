@@ -84,9 +84,45 @@ class NavigationManager {
                 this.loadCollage();
                 break;
             case 'velvet':
-                // Velvet room content is static
+                // Gear & Tools content is static
+                break;
+            case 'friends':
+                this.loadFriendsList();
+                break;
+            case 'settings':
+                // Settings content is static
                 break;
         }
+    }
+    
+    loadFriendsList() {
+        const socialLinksDiv = document.getElementById('socialLinks');
+        if (!socialLinksDiv) return;
+        
+        // Clear if already loaded (unless in edit mode)
+        if (socialLinksDiv.children.length > 0 && typeof contentManager !== 'undefined' && !contentManager.isEditMode) {
+            return;
+        }
+        
+        const socialLinks = (typeof contentManager !== 'undefined' && contentManager.content) 
+            ? contentManager.content.socialLinks 
+            : CONFIG.content.socialLinks;
+        
+        if (socialLinks.length === 0) {
+            socialLinksDiv.innerHTML = '<p style="text-align: center; opacity: 0.7; padding: 2rem;">No social links available yet. Add links in Resource Pack Creator.</p>';
+            return;
+        }
+        
+        socialLinksDiv.innerHTML = '';
+        socialLinks.forEach(link => {
+            const linkElement = document.createElement('a');
+            linkElement.href = link.url;
+            linkElement.target = '_blank';
+            linkElement.rel = 'noopener noreferrer';
+            linkElement.className = 'social-link';
+            linkElement.textContent = link.name;
+            socialLinksDiv.appendChild(linkElement);
+        });
     }
     
     loadPhotos() {

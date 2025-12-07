@@ -542,7 +542,7 @@ body {
 }
 
 /* ============================================
-   VELVET ROOM / TAROT
+   VELVET ROOM / TAROT / GEAR & TOOLS
    ============================================ */
 
 .velvet-lounge {
@@ -551,6 +551,12 @@ body {
     gap: 2rem;
     margin: 4rem 0;
     min-height: 600px;
+}
+
+@media (max-width: 768px) {
+    .velvet-lounge {
+        grid-template-columns: 1fr;
+    }
 }
 
 .velvet-left,
@@ -924,6 +930,83 @@ body {
 
 .replay-btn::before {
     display: none;
+}
+
+/* ============================================
+   FRIENDS LIST & SETTINGS
+   ============================================ */
+
+.misc-data {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-link {
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.social-link:hover {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: var(--primary);
+    transform: translateX(8px);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+}
+
+.data-link {
+    color: var(--primary-light);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 0.75rem;
+}
+
+.data-link:hover {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+}
+
+.settings-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.settings-container .data-card p {
+    color: var(--text-secondary);
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+.settings-container .cta-button {
+    margin-top: 1.5rem;
+    width: 100%;
 }
 
 /* ============================================

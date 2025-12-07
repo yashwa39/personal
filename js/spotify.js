@@ -13,10 +13,7 @@ class SpotifyManager {
     }
     
     setupEventListeners() {
-        const fuseBtn = document.getElementById('fuseBtn');
-        if (fuseBtn) {
-            fuseBtn.addEventListener('click', () => this.fuseArtists());
-        }
+        // Event listeners for Spotify features
     }
     
     // Load a Spotify playlist
@@ -114,8 +111,6 @@ class SpotifyManager {
             }, index * 100);
         });
         
-        // Set up fusion game after tracks are displayed
-        this.setupFusionGame();
     }
     
     // Create track card with image and hover preview
@@ -234,20 +229,6 @@ class SpotifyManager {
         });
     }
     
-    // Fusion game - combine artists
-    fuseArtists() {
-        const slots = document.querySelectorAll('.fusion-slot.filled');
-        if (slots.length < 2) {
-            alert('Please select two artists to fuse!');
-            return;
-        }
-        
-        const artist1 = slots[0].dataset.artist;
-        const artist2 = slots[1].dataset.artist;
-        
-        const fusionResult = `Fusion of ${artist1} & ${artist2}`;
-        alert(`Created fusion: ${fusionResult}\n\nThis would generate a playlist combining both artists' styles!`);
-    }
 }
 
 // Initialize Spotify manager

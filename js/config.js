@@ -78,11 +78,6 @@ const CONFIG = {
         stagger: 0.1
     },
     
-    // Game Configuration
-    game: {
-        lockpickDifficulty: 0.15, // Range for successful unlock (0.15 = 15% tolerance)
-        fusionEnabled: true
-    }
 };
 
 // Export for use in other files

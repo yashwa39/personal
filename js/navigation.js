@@ -181,13 +181,10 @@ class NavigationManager {
             card.innerHTML = `
                 <h3>${project.title}</h3>
                 <p>${project.description || ''}</p>
+                ${project.link ? '<span class="project-link-indicator">→</span>' : ''}
             `;
             
-            if (project.locked) {
-                card.addEventListener('click', () => {
-                    this.openLockpickGame(index);
-                });
-            } else if (project.link) {
+            if (project.link) {
                 card.style.cursor = 'pointer';
                 card.addEventListener('click', () => {
                     window.open(project.link, '_blank');
@@ -198,66 +195,6 @@ class NavigationManager {
         });
         
         animationManager.staggerGridItems('.project-card');
-    }
-    
-    openLockpickGame(projectIndex) {
-        const modal = document.getElementById('lockpickModal');
-        const slider = document.getElementById('lockpickSlider');
-        const unlockBtn = document.getElementById('unlockBtn');
-        
-        if (!modal || !slider) return;
-        
-        modal.classList.remove('hidden');
-        audioManager.playClickSound();
-        
-        // Set random target position
-        const targetPosition = 30 + Math.random() * 40; // Between 30 and 70
-        const targetElement = document.querySelector('.lockpick-target');
-        if (targetElement) {
-            targetElement.style.left = targetPosition + '%';
-        }
-        
-        if (unlockBtn) {
-            unlockBtn.onclick = () => {
-                const sliderValue = parseFloat(slider.value);
-                const targetValue = targetPosition;
-                const tolerance = CONFIG.game.lockpickDifficulty * 100;
-                
-                if (Math.abs(sliderValue - targetValue) <= tolerance) {
-                    // Success!
-                    audioManager.playEffect('unlock');
-                    animationManager.createParticleBurst(
-                        window.innerWidth / 2,
-                        window.innerHeight / 2,
-                        '#FFD700'
-                    );
-                    
-                    // Unlock project
-                    const projectCard = document.querySelector(`[data-project-index="${projectIndex}"]`);
-                    if (projectCard) {
-                        projectCard.classList.add('unlocked');
-                        projectCard.querySelector('::after')?.remove();
-                    }
-                    
-                    modal.classList.add('hidden');
-                    
-                    const projects = (typeof contentManager !== 'undefined' && contentManager.content) 
-                        ? contentManager.content.projects 
-                        : CONFIG.content.projects;
-                    const project = projects[projectIndex];
-                    if (project.link) {
-                        setTimeout(() => {
-                            window.open(project.link, '_blank');
-                        }, 500);
-                    }
-                } else {
-                    // Failed
-                    audioManager.playClickSound();
-                    slider.value = 0;
-                    alert('Not quite! Try again.');
-                }
-            };
-        }
     }
     
     loadCollage() {
@@ -393,7 +330,7 @@ class NavigationManager {
     }
     
     closeModals() {
-        const modals = document.querySelectorAll('.photo-modal, .lockpick-modal');
+        const modals = document.querySelectorAll('.photo-modal');
         modals.forEach(modal => {
             modal.classList.add('hidden');
         });

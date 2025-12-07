@@ -337,9 +337,6 @@ class ContentManager {
                     <input type="text" value="${project.title}" data-index="${index}" data-field="title" placeholder="Title">
                     <textarea data-index="${index}" data-field="description" placeholder="Description">${project.description || ''}</textarea>
                     <input type="text" value="${project.link || ''}" data-index="${index}" data-field="link" placeholder="Link URL">
-                    <label>
-                        <input type="checkbox" ${project.locked ? 'checked' : ''} data-index="${index}" data-field="locked"> Locked (requires mini-game)
-                    </label>
                     <button class="delete-btn" onclick="contentManager.deleteProject(${index})">Delete</button>
                 </div>
             `;
@@ -353,9 +350,6 @@ class ContentManager {
                 <input type="text" id="newProjectTitle" placeholder="Title">
                 <textarea id="newProjectDescription" placeholder="Description"></textarea>
                 <input type="text" id="newProjectLink" placeholder="Link URL">
-                <label>
-                    <input type="checkbox" id="newProjectLocked"> Locked
-                </label>
                 <button class="add-btn" onclick="contentManager.addProject()">Add Project</button>
             </div>
             <div class="modal-buttons">
@@ -369,11 +363,7 @@ class ContentManager {
             input.addEventListener('change', (e) => {
                 const index = parseInt(e.target.dataset.index);
                 const field = e.target.dataset.field;
-                if (e.target.type === 'checkbox') {
-                    this.content.projects[index][field] = e.target.checked;
-                } else {
-                    this.content.projects[index][field] = e.target.value;
-                }
+                this.content.projects[index][field] = e.target.value;
             });
         });
     }
@@ -382,14 +372,13 @@ class ContentManager {
         const title = document.getElementById('newProjectTitle').value;
         const description = document.getElementById('newProjectDescription').value;
         const link = document.getElementById('newProjectLink').value;
-        const locked = document.getElementById('newProjectLocked').checked;
         
         if (!title) {
             alert('Please provide a title');
             return;
         }
         
-        this.content.projects.push({ title, description, link, locked });
+        this.content.projects.push({ title, description, link });
         this.openProjectEditor(); // Refresh editor
     }
     

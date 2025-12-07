@@ -63,6 +63,11 @@ class ContentManager {
             lockBtn.style.display = this.isEditMode ? 'flex' : 'none';
         }
         
+        const resourcePackBtn = document.getElementById('resourcePackBtn');
+        if (resourcePackBtn) {
+            resourcePackBtn.style.display = (this.isEditMode && !this.isLocked) ? 'flex' : 'none';
+        }
+        
         audioManager.playClickSound();
     }
     
@@ -91,10 +96,18 @@ class ContentManager {
             lockBtn.style.display = (this.isEditMode && !this.isLocked) ? 'flex' : 'none';
         }
         
+        // Setup resource pack button (same as edit button)
+        const resourcePackBtn = document.getElementById('resourcePackBtn');
+        if (resourcePackBtn) {
+            resourcePackBtn.addEventListener('click', () => this.toggleEditMode());
+            resourcePackBtn.style.display = this.isLocked ? 'none' : 'flex';
+        }
+        
         // Don't show edit button if locked
         if (this.isLocked) {
             const editBtn = document.getElementById('editModeBtn');
             if (editBtn) editBtn.style.display = 'none';
+            if (resourcePackBtn) resourcePackBtn.style.display = 'none';
         }
     }
     

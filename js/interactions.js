@@ -10,6 +10,22 @@ class InteractionManager {
         this.setupContactForm();
         this.setupHoverEffects();
         this.setupScrollEffects();
+        this.setupResourcePackButton();
+    }
+    
+    setupResourcePackButton() {
+        const openResourcePackBtn = document.getElementById('openResourcePack');
+        if (openResourcePackBtn) {
+            openResourcePackBtn.addEventListener('click', () => {
+                if (typeof contentManager !== 'undefined') {
+                    contentManager.toggleEditMode();
+                    // Navigate to entrance section to see the edit interface
+                    if (typeof navigationManager !== 'undefined') {
+                        navigationManager.navigateToSection('entrance');
+                    }
+                }
+            });
+        }
     }
     
     // Mask click interaction

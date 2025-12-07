@@ -24,7 +24,7 @@ class NavigationManager {
         const enterBtn = document.getElementById('enterPalace');
         if (enterBtn) {
             enterBtn.addEventListener('click', () => {
-                this.navigateToSection('music');
+                this.navigateToSection('projects'); // Navigate to Inventory
             });
         }
         

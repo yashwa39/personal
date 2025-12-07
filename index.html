@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phantom Thief's Den - Personal Palace</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="background-container">
+        <div class="cityscape"></div>
+        <div class="rain-effect"></div>
+        <div class="particles"></div>
+    </div>
+
+    <!-- Navigation Hub (Thief's Den) -->
+    <nav class="thief-den" id="thiefDen">
+        <div class="den-menu">
+            <div class="den-icon active" data-section="entrance">
+                <div class="icon-glow"></div>
+                <span>Awakening</span>
+            </div>
+            <div class="den-icon" data-section="music">
+                <div class="icon-glow"></div>
+                <span>Music Palace</span>
+            </div>
+            <div class="den-icon" data-section="photos">
+                <div class="icon-glow"></div>
+                <span>The Shadows</span>
+            </div>
+            <div class="den-icon" data-section="projects">
+                <div class="icon-glow"></div>
+                <span>The Heist</span>
+            </div>
+            <div class="den-icon" data-section="collage">
+                <div class="icon-glow"></div>
+                <span>Unconscious</span>
+            </div>
+            <div class="den-icon" data-section="velvet">
+                <div class="icon-glow"></div>
+                <span>Velvet Room</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Audio Controls -->
+    <div class="audio-controls">
+        <button class="audio-btn" id="musicToggle">
+            <span class="audio-icon">♪</span>
+            <span class="audio-label">Music</span>
+        </button>
+        <button class="audio-btn" id="sfxToggle">
+            <span class="audio-icon">🔊</span>
+            <span class="audio-label">SFX</span>
+        </button>
+        <button class="audio-btn lock-btn" id="lockEditingBtn" style="display: none;">
+            <span class="audio-icon">🔒</span>
+            <span class="audio-label">Lock Editing</span>
+        </button>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="main-container">
+        <!-- Entrance/Hub Section -->
+        <section class="section entrance-section active" id="entrance">
+            <div class="section-content">
+                <div class="awakening-sequence">
+                    <div class="mask-container">
+                        <div class="phantom-mask" id="phantomMask">
+                            <div class="mask-glow"></div>
+                        </div>
+                    </div>
+                    <h1 class="main-title glitch-text" data-text="PHANTOM THIEF">PHANTOM THIEF</h1>
+                    <p class="subtitle">Welcome to My Palace</p>
+                    <div class="bio-preview">
+                        <div class="bio-card">
+                            <h2>About</h2>
+                            <p id="bioText">Click the mask to reveal more...</p>
+                            <div class="social-link-preview" id="socialLinkPreview">
+                                <span class="link-label">Persona Trait:</span>
+                                <span class="link-value" id="topGenre">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="cta-button pulse" id="enterPalace">Enter Palace</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Music Palace Section -->
+        <section class="section music-section" id="music">
+            <div class="section-content">
+                <h2 class="section-title">Music Palace</h2>
+                
+                <!-- Spotify Playlist Embed -->
+                <div class="spotify-embed-container">
+                    <div id="spotifyEmbedContainer" class="spotify-embed-wrapper">
+                        <!-- Spotify embed iframe will be inserted here -->
+                    </div>
+                </div>
+                
+                <!-- Musical Treasures Grid -->
+                <div class="treasure-vault">
+                    <h3 class="vault-title">Musical Treasures</h3>
+                    <p class="vault-subtitle">Hover over tracks to preview • Click to open in Spotify</p>
+                    <div class="treasure-grid" id="treasureGrid">
+                        <!-- Track cards will be inserted here -->
+                    </div>
+                </div>
+                
+                <!-- Fusion Game -->
+                <div class="fusion-game">
+                    <h3>Persona Fusion</h3>
+                    <p>Combine your favorite artists to create a new playlist!</p>
+                    <div class="fusion-area" id="fusionArea">
+                        <div class="fusion-slot" data-slot="1"></div>
+                        <div class="fusion-slot" data-slot="2"></div>
+                        <div class="fusion-result">+</div>
+                    </div>
+                    <button class="fusion-btn" id="fuseBtn">Fuse Artists</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Gallery Section -->
+        <section class="section photos-section" id="photos">
+            <div class="section-content">
+                <h2 class="section-title">The Shadows</h2>
+                <div class="photo-grid" id="photoGrid">
+                    <!-- Photos will be dynamically loaded -->
+                </div>
+                <div class="photo-modal hidden" id="photoModal">
+                    <div class="modal-content">
+                        <button class="modal-close">&times;</button>
+                        <img id="modalImage" src="" alt="Enlarged photo">
+                        <div class="photo-info">
+                            <h3 id="photoTitle"></h3>
+                            <p id="photoDescription"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Showcase Section -->
+        <section class="section projects-section" id="projects">
+            <div class="section-content">
+                <h2 class="section-title">The Heist</h2>
+                <div class="vault-container">
+                    <div class="project-grid" id="projectGrid">
+                        <!-- Projects will be dynamically loaded -->
+                    </div>
+                </div>
+                <div class="lockpick-modal hidden" id="lockpickModal">
+                    <div class="lockpick-game">
+                        <h3>Unlock Project</h3>
+                        <div class="lockpick-slider">
+                            <input type="range" id="lockpickSlider" min="0" max="100" value="0">
+                            <div class="lockpick-target"></div>
+                        </div>
+                        <p class="lockpick-hint">Align the slider to unlock!</p>
+                        <button class="lockpick-btn" id="unlockBtn">Unlock</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Collage Creator Section -->
+        <section class="section collage-section" id="collage">
+            <div class="section-content">
+                <h2 class="section-title">The Collective Unconscious</h2>
+                <div class="collage-canvas" id="collageCanvas">
+                    <!-- Collage elements will be draggable -->
+                </div>
+                <div class="collage-controls">
+                    <button class="collage-btn" id="saveCollage">Seal Collage</button>
+                    <button class="collage-btn" id="resetCollage">Reset</button>
+                    <input type="file" id="uploadImage" accept="image/*" style="display: none;">
+                    <button class="collage-btn" id="uploadBtn">Add Image</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Velvet Room Section -->
+        <section class="section velvet-section" id="velvet">
+            <div class="section-content">
+                <h2 class="section-title">The Velvet Room</h2>
+                <div class="velvet-lounge">
+                    <div class="tarot-spread" id="tarotSpread">
+                        <!-- Tarot cards will be generated here -->
+                    </div>
+                    <button class="tarot-btn" id="drawCards">Draw Cards</button>
+                    <div class="persona-reading" id="personaReading">
+                        <h3>Persona Reading</h3>
+                        <p id="readingText">Draw cards to reveal insights from your music...</p>
+                    </div>
+                </div>
+                <div class="misc-data">
+                    <div class="data-card">
+                        <h3>Resume</h3>
+                        <a href="#" class="data-link">View Resume</a>
+                    </div>
+                    <div class="data-card">
+                        <h3>Social Links</h3>
+                        <div class="social-links" id="socialLinks">
+                            <!-- Social links will be here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer/Outro -->
+        <footer class="footer-section">
+            <div class="game-over-screen">
+                <h2 class="game-over-title">Game Over</h2>
+                <div class="credits">
+                    <p>Created with the power of Persona</p>
+                    <p>© 2024 Phantom Thief's Den</p>
+                </div>
+                <div class="contact-form">
+                    <h3>Steal My Heart</h3>
+                    <form id="contactForm">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <textarea placeholder="Your Message" required></textarea>
+                        <button type="submit" class="submit-btn">Send</button>
+                    </form>
+                </div>
+                <button class="replay-btn" id="replayBtn">Replay</button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-mask"></div>
+            <p class="loading-text">Loading Palace...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/contentManager.js"></script>
+    <script src="js/spotify.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/interactions.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+

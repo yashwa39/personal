@@ -337,10 +337,13 @@ body {
 }
 
 .subtitle {
-    font-size: 1.5rem;
-    margin: 20px 0;
-    color: var(--white);
-    opacity: 0.8;
+    font-size: 1.8rem;
+    margin: 30px 0;
+    color: var(--pure-white);
+    opacity: 0.9;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .bio-preview {
@@ -384,13 +387,18 @@ body {
 }
 
 .link-label {
-    font-weight: 600;
-    color: var(--electric-blue);
+    font-weight: 700;
+    color: var(--persona-red);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
 }
 
 .link-value {
-    color: var(--gold);
-    font-weight: 700;
+    color: var(--pure-white);
+    font-weight: 900;
+    font-size: 1.1rem;
+    text-shadow: 0 0 15px var(--persona-glow);
 }
 
 .cta-button {
@@ -469,31 +477,35 @@ body {
 }
 
 .stat-card {
-    background: var(--card-bg);
-    border: 2px solid var(--electric-blue);
-    border-radius: 15px;
-    padding: 20px;
+    background: var(--pure-black);
+    border: 2px solid var(--persona-red);
+    border-radius: 0;
+    padding: 25px;
     text-align: center;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+    backdrop-filter: blur(20px);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 30px var(--glow-blue);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px var(--persona-glow), 0 0 30px rgba(220, 20, 60, 0.4);
+    border-color: var(--pure-white);
 }
 
 .stat-card h3 {
     font-family: 'Orbitron', sans-serif;
-    color: var(--electric-blue);
-    margin-bottom: 10px;
-    font-size: 0.9rem;
+    color: var(--persona-red);
+    margin-bottom: 15px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .stat-value {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--gold);
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--persona-red);
+    text-shadow: 0 0 20px var(--persona-glow);
 }
 
 /* Spotify Embed Container */
@@ -749,10 +761,13 @@ body {
 
 .playlist-title {
     font-family: 'Orbitron', sans-serif;
-    font-size: 2rem;
-    color: var(--electric-blue);
-    margin-bottom: 20px;
+    font-size: 2.5rem;
+    color: var(--persona-red);
+    margin-bottom: 30px;
     text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 25px var(--persona-glow);
 }
 
 .playlist-grid {
@@ -1939,9 +1954,12 @@ body.edit-mode .edit-section-btn {
 
 .edit-form label {
     font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    color: var(--electric-blue);
-    margin-top: 10px;
+    font-weight: 700;
+    color: var(--persona-red);
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
 }
 
 .edit-form input,
@@ -2038,15 +2056,22 @@ body.edit-mode .edit-section-btn {
 }
 
 .delete-btn {
-    background: var(--crimson-red);
-    color: var(--white);
-    padding: 8px 15px;
+    background: var(--pure-black);
+    border: 2px solid var(--persona-red);
+    color: var(--persona-red);
+    padding: 10px 20px;
     font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
 }
 
 .delete-btn:hover {
-    background: #cc0000;
-    box-shadow: 0 0 15px var(--glow-red);
+    background: var(--persona-red);
+    color: var(--pure-black);
+    box-shadow: 0 0 25px var(--persona-glow);
+    transform: scale(1.05);
 }
 
 /* Edit Lists */

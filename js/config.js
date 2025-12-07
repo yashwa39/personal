@@ -52,7 +52,8 @@ const CONFIG = {
             name: 'Phantom Thief',
             age: 'Unknown',
             interests: ['Music', 'Art', 'Technology', 'Gaming'],
-            backstory: 'A mysterious figure who steals hearts and showcases their palace to the world...'
+            backstory: 'A mysterious figure who steals hearts and showcases their palace to the world...',
+            images: [] // Array of {url: 'image_url', caption: 'optional caption'}
         },
         photos: [
             // Add photo paths here

@@ -190,13 +190,17 @@
             <div class="section-content">
                 <h2 class="section-title">The Velvet Room</h2>
                 <div class="velvet-lounge">
-                    <div class="tarot-spread" id="tarotSpread">
-                        <!-- Tarot cards will be generated here -->
+                    <div class="velvet-left">
+                        <div class="tarot-spread" id="tarotSpread">
+                            <!-- Tarot cards will be generated here -->
+                        </div>
+                        <button class="tarot-btn" id="drawCards">DRAW CARDS</button>
                     </div>
-                    <button class="tarot-btn" id="drawCards">Draw Cards</button>
-                    <div class="persona-reading" id="personaReading">
-                        <h3>Persona Reading</h3>
-                        <p id="readingText">Draw cards to reveal insights from your music...</p>
+                    <div class="velvet-right">
+                        <div class="persona-reading" id="personaReading">
+                            <h3>PERSONA READING</h3>
+                            <div id="readingText">Draw cards to reveal your destiny...</div>
+                        </div>
                     </div>
                 </div>
                 <div class="misc-data">
@@ -251,6 +255,7 @@
     <script src="js/config.js"></script>
     <script src="js/audio.js"></script>
     <script src="js/animations.js"></script>
+    <script src="js/tarot.js"></script>
     <script src="js/contentManager.js"></script>
     <script src="js/spotify.js"></script>
     <script src="js/navigation.js"></script>

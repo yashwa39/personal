@@ -123,7 +123,21 @@ class ContentManager {
     }
     
     openBioEditor() {
-        const modal = this.createModal('Edit Bio', null);
+        const modal = this.createModal('Edit Bio & About', null);
+        
+        const bioImages = this.content.bio.images || [];
+        let imagesHTML = '<div class="bio-images-list">';
+        bioImages.forEach((img, index) => {
+            imagesHTML += `
+                <div class="bio-image-item">
+                    <img src="${img.url}" alt="Bio image" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
+                    <input type="text" value="${img.url}" data-index="${index}" data-field="url" placeholder="Image URL">
+                    <input type="text" value="${img.caption || ''}" data-index="${index}" data-field="caption" placeholder="Caption (optional)">
+                    <button class="delete-btn" onclick="contentManager.deleteBioImage(${index})">Delete</button>
+                </div>
+            `;
+        });
+        imagesHTML += '</div>';
         
         modal.innerHTML = `
             <div class="edit-form">
@@ -139,12 +153,56 @@ class ContentManager {
                 <label>Backstory:</label>
                 <textarea id="editBioBackstory" rows="5" required>${this.content.bio.backstory}</textarea>
                 
+                <div class="bio-images-section">
+                    <h3>About Images (from web URLs)</h3>
+                    ${imagesHTML}
+                    <div class="add-image-section">
+                        <input type="url" id="newBioImageUrl" placeholder="Image URL (e.g., https://example.com/image.jpg)">
+                        <input type="text" id="newBioImageCaption" placeholder="Caption (optional)">
+                        <button class="add-btn" onclick="contentManager.addBioImage()">Add Image</button>
+                    </div>
+                </div>
+                
                 <div class="modal-buttons">
                     <button class="save-btn" onclick="contentManager.saveBio()">Save</button>
                     <button class="cancel-btn" onclick="contentManager.closeModal()">Cancel</button>
                 </div>
             </div>
         `;
+        
+        // Add real-time updates for images
+        modal.querySelectorAll('input[data-field]').forEach(input => {
+            input.addEventListener('change', (e) => {
+                const index = parseInt(e.target.dataset.index);
+                const field = e.target.dataset.field;
+                if (!this.content.bio.images) this.content.bio.images = [];
+                if (!this.content.bio.images[index]) this.content.bio.images[index] = {};
+                this.content.bio.images[index][field] = e.target.value;
+            });
+        });
+    }
+    
+    addBioImage() {
+        const url = document.getElementById('newBioImageUrl').value;
+        const caption = document.getElementById('newBioImageCaption').value;
+        
+        if (!url) {
+            alert('Please provide an image URL');
+            return;
+        }
+        
+        if (!this.content.bio.images) this.content.bio.images = [];
+        this.content.bio.images.push({ url, caption });
+        this.openBioEditor(); // Refresh editor
+    }
+    
+    deleteBioImage(index) {
+        if (confirm('Delete this image?')) {
+            if (this.content.bio.images) {
+                this.content.bio.images.splice(index, 1);
+                this.openBioEditor(); // Refresh editor
+            }
+        }
     }
     
     saveBio() {
@@ -153,7 +211,10 @@ class ContentManager {
         const interests = document.getElementById('editBioInterests').value.split(',').map(i => i.trim()).filter(i => i);
         const backstory = document.getElementById('editBioBackstory').value;
         
-        this.content.bio = { name, age, interests, backstory };
+        // Preserve images
+        const images = this.content.bio.images || [];
+        
+        this.content.bio = { name, age, interests, backstory, images };
         this.saveContent();
         this.loadContentIntoUI();
         this.closeModal();
@@ -528,12 +589,28 @@ class ContentManager {
         const bioText = document.getElementById('bioText');
         if (bioText) {
             const bio = this.content.bio;
-            bioText.innerHTML = `
+            let bioHTML = `
                 <strong>Name:</strong> ${bio.name}<br>
                 <strong>Age:</strong> ${bio.age}<br>
                 <strong>Interests:</strong> ${bio.interests.join(', ')}<br><br>
                 ${bio.backstory}
             `;
+            
+            // Add images if available
+            if (bio.images && bio.images.length > 0) {
+                bioHTML += '<div class="bio-images-display">';
+                bio.images.forEach(img => {
+                    bioHTML += `
+                        <div class="bio-image-display-item">
+                            <img src="${img.url}" alt="About" onerror="this.style.display='none'">
+                            ${img.caption ? `<p class="bio-image-caption">${img.caption}</p>` : ''}
+                        </div>
+                    `;
+                });
+                bioHTML += '</div>';
+            }
+            
+            bioText.innerHTML = bioHTML;
         }
         
         // Update photos (handled by navigation manager)

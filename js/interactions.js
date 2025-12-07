@@ -53,7 +53,7 @@ class InteractionManager {
         });
     }
     
-    // Tarot card interactions
+    // Tarot card interactions with real tarot deck
     setupTarotCards() {
         const drawBtn = document.getElementById('drawCards');
         const spread = document.getElementById('tarotSpread');
@@ -61,62 +61,78 @@ class InteractionManager {
         
         if (!drawBtn || !spread) return;
         
-        const tarotCards = [
-            { name: 'The Fool', icon: '🃏', meaning: 'New beginnings, innocence' },
-            { name: 'The Magician', icon: '🎩', meaning: 'Manifestation, resourcefulness' },
-            { name: 'The High Priestess', icon: '🌙', meaning: 'Intuition, mystery' },
-            { name: 'The Empress', icon: '👑', meaning: 'Abundance, nurturing' },
-            { name: 'The Emperor', icon: '⚔️', meaning: 'Authority, structure' },
-            { name: 'The Lovers', icon: '💑', meaning: 'Love, harmony' },
-            { name: 'The Chariot', icon: '🏎️', meaning: 'Control, determination' },
-            { name: 'Strength', icon: '💪', meaning: 'Courage, inner strength' },
-            { name: 'The Hermit', icon: '🕯️', meaning: 'Introspection, guidance' },
-            { name: 'Wheel of Fortune', icon: '🎡', meaning: 'Cycles, change' }
-        ];
-        
         drawBtn.addEventListener('click', () => {
             audioManager.playClickSound();
             spread.innerHTML = '';
             
-            // Draw 3 random cards
-            const drawnCards = [];
-            for (let i = 0; i < 3; i++) {
-                const randomCard = tarotCards[Math.floor(Math.random() * tarotCards.length)];
-                drawnCards.push(randomCard);
+            if (typeof tarotReader === 'undefined') {
+                console.error('Tarot reader not loaded');
+                return;
+            }
+            
+            // Draw 3 cards using real tarot deck
+            const drawnCards = tarotReader.drawCards(3);
+            
+            drawnCards.forEach((card, index) => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'tarot-card';
+                cardElement.dataset.cardId = card.id;
+                cardElement.dataset.reversed = card.reversed;
                 
-                const card = document.createElement('div');
-                card.className = 'tarot-card';
-                card.innerHTML = `
+                cardElement.innerHTML = `
                     <div class="tarot-card-front">
-                        <div class="tarot-icon">${randomCard.icon}</div>
+                        <img src="${card.image}" alt="${card.name}" class="tarot-card-image" onerror="this.src='https://via.placeholder.com/200x300/000000/FFFFFF?text=${encodeURIComponent(card.name)}'">
+                        <div class="tarot-card-back-pattern"></div>
                     </div>
                     <div class="tarot-card-back">
-                        <div class="tarot-name">${randomCard.name}</div>
-                        <p style="font-size: 0.8rem; margin-top: 10px;">${randomCard.meaning}</p>
+                        <div class="tarot-card-back-content">
+                            <h3 class="tarot-name">${card.name}</h3>
+                            ${card.reversed ? '<span class="reversed-badge">REVERSED</span>' : ''}
+                            <p class="tarot-meaning">${card.meaning}</p>
+                            <p class="tarot-description">${card.description}</p>
+                        </div>
                     </div>
                 `;
                 
-                card.addEventListener('click', () => {
+                cardElement.addEventListener('click', () => {
                     audioManager.playEffect('cardFlip');
-                    animationManager.flipCard(card);
+                    animationManager.flipCard(cardElement);
                 });
                 
-                spread.appendChild(card);
+                spread.appendChild(cardElement);
                 
-                // Stagger animation
+                // Stagger animation with Persona 5 style
                 setTimeout(() => {
-                    animationManager.revealTreasure(card);
-                }, i * 200);
-            }
+                    animationManager.revealTreasure(cardElement);
+                    // Add dynamic entrance
+                    if (typeof gsap !== 'undefined') {
+                        gsap.from(cardElement, {
+                            scale: 0,
+                            rotation: card.reversed ? 180 : 0,
+                            opacity: 0,
+                            duration: 0.6,
+                            delay: index * 0.2,
+                            ease: 'back.out(1.7)'
+                        });
+                    }
+                }, index * 200);
+            });
             
-        // Generate reading based on cards and Spotify data
-        if (reading) {
-            const bio = (typeof contentManager !== 'undefined' && contentManager.content) 
-                ? contentManager.content.bio 
-                : CONFIG.content.bio;
-            reading.textContent = drawnCards.map(c => c.meaning).join(' | ') + 
-                ` | Your persona: ${bio.name}`;
-        }
+            // Generate detailed reading
+            if (reading && typeof tarotReader !== 'undefined') {
+                const readingHTML = tarotReader.generateReading(drawnCards, 'threeCard');
+                reading.innerHTML = readingHTML;
+                
+                // Animate reading appearance
+                if (typeof gsap !== 'undefined') {
+                    gsap.from(reading, {
+                        opacity: 0,
+                        y: 20,
+                        duration: 0.8,
+                        delay: 0.6
+                    });
+                }
+            }
         });
     }
     

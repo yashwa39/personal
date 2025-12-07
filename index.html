@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Creepster&family=Rubik+Glitch&family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
 </head>
 <body>
     <!-- Background Elements -->
@@ -22,27 +23,33 @@
         <div class="den-menu">
             <div class="den-icon active" data-section="entrance">
                 <div class="icon-glow"></div>
-                <span>Awakening</span>
+                <span class="minecraft-icon">❤️</span>
+                <span>PLAYER STATS</span>
             </div>
             <div class="den-icon" data-section="music">
                 <div class="icon-glow"></div>
-                <span>Music Palace</span>
+                <span class="minecraft-icon">🎵</span>
+                <span>MUSIC</span>
             </div>
             <div class="den-icon" data-section="photos">
                 <div class="icon-glow"></div>
-                <span>The Shadows</span>
+                <span class="minecraft-icon">📸</span>
+                <span>GALLERY</span>
             </div>
             <div class="den-icon" data-section="projects">
                 <div class="icon-glow"></div>
-                <span>The Heist</span>
+                <span class="minecraft-icon">📦</span>
+                <span>INVENTORY</span>
             </div>
             <div class="den-icon" data-section="collage">
                 <div class="icon-glow"></div>
-                <span>Unconscious</span>
+                <span class="minecraft-icon">🖼️</span>
+                <span>COLLECTION</span>
             </div>
             <div class="den-icon" data-section="velvet">
                 <div class="icon-glow"></div>
-                <span>Velvet Room</span>
+                <span class="minecraft-icon">⚡</span>
+                <span>GEAR & TOOLS</span>
             </div>
         </div>
     </nav>
@@ -61,6 +68,10 @@
             <span class="audio-icon">🔒</span>
             <span class="audio-label">Lock Editing</span>
         </button>
+        <button class="audio-btn resource-pack-btn" id="resourcePackBtn" style="display: none;">
+            <span class="audio-icon">⚒️</span>
+            <span class="audio-label">Resource Pack</span>
+        </button>
     </div>
 
     <!-- Main Content Container -->
@@ -74,8 +85,8 @@
                             <div class="mask-glow"></div>
                         </div>
                     </div>
-                    <h1 class="main-title glitch-text" data-text="PHANTOM THIEF">PHANTOM THIEF</h1>
-                    <p class="subtitle">Welcome to My Palace</p>
+                    <h1 class="main-title glitch-text" data-text="THE BUILDER">THE BUILDER</h1>
+                    <p class="subtitle">Welcome to My World</p>
                     <div class="bio-preview">
                         <div class="bio-card">
                             <h2>About</h2>
@@ -94,7 +105,7 @@
         <!-- Music Palace Section -->
         <section class="section music-section" id="music">
             <div class="section-content">
-                <h2 class="section-title">Music Palace</h2>
+                <h2 class="section-title">MUSIC</h2>
                 
                 <!-- Spotify Playlist Embed -->
                 <div class="spotify-embed-container">
@@ -118,7 +129,7 @@
         <!-- Photo Gallery Section -->
         <section class="section photos-section" id="photos">
             <div class="section-content">
-                <h2 class="section-title">The Shadows</h2>
+                <h2 class="section-title">GALLERY</h2>
                 <div class="photo-grid" id="photoGrid">
                     <!-- Photos will be dynamically loaded -->
                 </div>
@@ -138,7 +149,7 @@
         <!-- Projects Showcase Section -->
         <section class="section projects-section" id="projects">
             <div class="section-content">
-                <h2 class="section-title">Projects</h2>
+                <h2 class="section-title">INVENTORY</h2>
                 <div class="vault-container">
                     <div class="project-grid" id="projectGrid">
                         <!-- Projects will be dynamically loaded -->
@@ -150,7 +161,7 @@
         <!-- Collage Creator Section -->
         <section class="section collage-section" id="collage">
             <div class="section-content">
-                <h2 class="section-title">Collection</h2>
+                <h2 class="section-title">COLLECTION</h2>
                 <div class="collage-canvas" id="collageCanvas">
                     <!-- Collage elements will be draggable -->
                 </div>
@@ -166,7 +177,7 @@
         <!-- Velvet Room Section -->
         <section class="section velvet-section" id="velvet">
             <div class="section-content">
-                <h2 class="section-title">The Velvet Room</h2>
+                <h2 class="section-title">GEAR & TOOLS</h2>
                 <div class="velvet-lounge">
                     <div class="velvet-left">
                         <div class="tarot-spread" id="tarotSpread">
